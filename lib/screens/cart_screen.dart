@@ -134,13 +134,11 @@ class CartScreen extends StatelessWidget {
                       height: 80,
                       decoration: BoxDecoration(
                         color: Colors.orange[100],
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Center(
-                        child: Text(
-                          item.foodItem.image,
-                          style: const TextStyle(fontSize: 40),
-                        ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: _buildFoodImage(item.foodItem.image),
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -309,6 +307,21 @@ class CartScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildFoodImage(String image) {
+    if (image.startsWith('assets/')) {
+      return Image.asset(
+        image,
+        fit: BoxFit.cover,
+      );
+    }
+    return Center(
+      child: Text(
+        image,
+        style: const TextStyle(fontSize: 40),
+      ),
     );
   }
 }

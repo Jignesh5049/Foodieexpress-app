@@ -4,6 +4,11 @@ import '../bloc/auth/auth_bloc.dart';
 import '../bloc/auth/auth_state.dart';
 import '../bloc/auth/auth_event.dart';
 import 'login_screen.dart';
+import 'delivery_addresses_screen.dart';
+import 'edit_profile_screen.dart';
+import 'order_history_screen.dart';
+import 'payment_methods_screen.dart';
+import 'settings_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -14,10 +19,14 @@ class ProfileScreen extends StatelessWidget {
       builder: (context, state) {
         String userName = 'Guest';
         String userEmail = 'guest@example.com';
+        String userPhone = '';
+        String userBirthDate = '';
 
         if (state is AuthAuthenticated) {
           userName = state.user.name;
           userEmail = state.user.email;
+          userPhone = state.user.phone ?? '';
+          userBirthDate = state.user.birthDate ?? '';
         }
 
         return SafeArea(
@@ -59,6 +68,26 @@ class ProfileScreen extends StatelessWidget {
                     userEmail,
                     style: const TextStyle(fontSize: 14, color: Colors.grey),
                   ),
+                  if (userPhone.isNotEmpty) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      userPhone,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                  if (userBirthDate.isNotEmpty) ...[
+                    const SizedBox(height: 2),
+                    Text(
+                      userBirthDate,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 32),
 
                   // Profile Options
@@ -67,9 +96,10 @@ class ProfileScreen extends StatelessWidget {
                     Icons.person_outline,
                     'Edit Profile',
                     () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Edit Profile feature coming soon!'),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const EditProfileScreen(),
                         ),
                       );
                     },
@@ -79,11 +109,11 @@ class ProfileScreen extends StatelessWidget {
                     Icons.location_on_outlined,
                     'Delivery Addresses',
                     () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'Delivery Addresses feature coming soon!',
-                          ),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const DeliveryAddressesScreen(),
                         ),
                       );
                     },
@@ -93,9 +123,11 @@ class ProfileScreen extends StatelessWidget {
                     Icons.payment_outlined,
                     'Payment Methods',
                     () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Payment Methods feature coming soon!'),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const PaymentMethodsScreen(),
                         ),
                       );
                     },
@@ -105,9 +137,10 @@ class ProfileScreen extends StatelessWidget {
                     Icons.history,
                     'Order History',
                     () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Order History feature coming soon!'),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const OrderHistoryScreen(),
                         ),
                       );
                     },
@@ -117,9 +150,10 @@ class ProfileScreen extends StatelessWidget {
                     Icons.notifications_outlined,
                     'Notifications',
                     () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Notifications feature coming soon!'),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsScreen(),
                         ),
                       );
                     },
@@ -137,9 +171,10 @@ class ProfileScreen extends StatelessWidget {
                     Icons.settings_outlined,
                     'Settings',
                     () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Settings feature coming soon!'),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsScreen(),
                         ),
                       );
                     },

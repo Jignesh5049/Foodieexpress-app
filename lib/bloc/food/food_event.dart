@@ -17,3 +17,12 @@ class FilterByCategory extends FoodEvent {
   @override
   List<Object?> get props => [category];
 }
+
+class SearchFoodItems extends FoodEvent {
+  final String query;
+
+  const SearchFoodItems({required this.query});
+
+  @override
+  List<Object?> get props => [query];
+}

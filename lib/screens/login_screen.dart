@@ -15,10 +15,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool rememberMe = false;
-  String selectedTab = 'Email';
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -88,154 +86,41 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 40),
 
-                  // Email/Phone Tabs
-                  Row(
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedTab = 'Email';
-                            });
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: selectedTab == 'Email'
-                                      ? const Color(0xFF6366F1)
-                                      : Colors.grey,
-                                  width: selectedTab == 'Email' ? 2 : 1,
-                                ),
-                              ),
-                            ),
-                            child: Text(
-                              'Email',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: selectedTab == 'Email'
-                                    ? FontWeight.w600
-                                    : FontWeight.normal,
-                                color: selectedTab == 'Email'
-                                    ? const Color(0xFF6366F1)
-                                    : Colors.grey,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedTab = 'Phone';
-                            });
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: selectedTab == 'Phone'
-                                      ? const Color(0xFF6366F1)
-                                      : Colors.grey,
-                                  width: selectedTab == 'Phone' ? 2 : 1,
-                                ),
-                              ),
-                            ),
-                            child: Text(
-                              'Phone',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: selectedTab == 'Phone'
-                                    ? FontWeight.w600
-                                    : FontWeight.normal,
-                                color: selectedTab == 'Phone'
-                                    ? const Color(0xFF6366F1)
-                                    : Colors.grey,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                  // Email Input
+                  const Text(
+                    'Email Address',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                  const SizedBox(height: 24),
-
-                  // Email or Phone Input
-                  if (selectedTab == 'Email') ...[
-                    const Text(
-                      'Email Address',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                  const SizedBox(height: 8),
+                  TextField(
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      hintText: 'you@example.com',
+                      hintStyle: const TextStyle(color: Colors.grey),
+                      prefixIcon: const Icon(
+                        Icons.email_outlined,
+                        color: Color(0xFF6366F1),
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    TextField(
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        hintText: 'you@example.com',
-                        hintStyle: const TextStyle(color: Colors.grey),
-                        prefixIcon: const Icon(
-                          Icons.email_outlined,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(color: Colors.grey),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(color: Colors.grey),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(
                           color: Color(0xFF6366F1),
                         ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(
-                            color: Color(0xFF6366F1),
-                          ),
-                        ),
                       ),
                     ),
-                  ] else ...[
-                    const Text(
-                      'Phone Number',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    TextField(
-                      controller: phoneController,
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
-                        hintText: '+1 (555) 000-0000',
-                        hintStyle: const TextStyle(color: Colors.grey),
-                        prefixIcon: const Icon(
-                          Icons.phone_outlined,
-                          color: Color(0xFF6366F1),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(
-                            color: Color(0xFF6366F1),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                   const SizedBox(height: 20),
 
                   // Password Input
@@ -320,13 +205,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: state is AuthLoading
                               ? null
                               : () {
-                                  final email = selectedTab == 'Email'
-                                      ? emailController.text
-                                      : phoneController.text;
-
                                   context.read<AuthBloc>().add(
                                     LoginRequested(
-                                      email: email,
+                                      email: emailController.text,
                                       password: passwordController.text,
                                     ),
                                   );

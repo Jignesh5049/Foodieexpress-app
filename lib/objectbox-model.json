@@ -1,0 +1,207 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:1477820681433528848",
+      "lastPropertyId": "8:5199336854907155560",
+      "name": "AddressEntity",
+      "properties": [
+        {
+          "id": "1:5622400124530857680",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8082307266984153535",
+          "name": "label",
+          "type": 9
+        },
+        {
+          "id": "3:9157864225720524016",
+          "name": "street",
+          "type": 9
+        },
+        {
+          "id": "4:1795896203812707004",
+          "name": "city",
+          "type": 9
+        },
+        {
+          "id": "5:390058692152350030",
+          "name": "state",
+          "type": 9
+        },
+        {
+          "id": "6:2265260786453945604",
+          "name": "zip",
+          "type": 9
+        },
+        {
+          "id": "7:2830698267504522050",
+          "name": "instructions",
+          "type": 9
+        },
+        {
+          "id": "8:5199336854907155560",
+          "name": "isDefault",
+          "type": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:5334531343012580273",
+      "lastPropertyId": "6:3414886064826556343",
+      "name": "OrderHistoryEntity",
+      "properties": [
+        {
+          "id": "1:4834519910213617738",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8073685669669816209",
+          "name": "createdAt",
+          "type": 9
+        },
+        {
+          "id": "3:4050028607632849430",
+          "name": "total",
+          "type": 8
+        },
+        {
+          "id": "4:8780638757814632901",
+          "name": "itemsCount",
+          "type": 6
+        },
+        {
+          "id": "5:4972434680091028305",
+          "name": "addressLabel",
+          "type": 9
+        },
+        {
+          "id": "6:3414886064826556343",
+          "name": "paymentLabel",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:193487142822458394",
+      "lastPropertyId": "5:8679616004112684093",
+      "name": "PaymentMethodEntity",
+      "properties": [
+        {
+          "id": "1:6359280108855887183",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1630571863541724183",
+          "name": "type",
+          "type": 9
+        },
+        {
+          "id": "3:2328391142415605904",
+          "name": "label",
+          "type": 9
+        },
+        {
+          "id": "4:765011959481417360",
+          "name": "details",
+          "type": 9
+        },
+        {
+          "id": "5:8679616004112684093",
+          "name": "isDefault",
+          "type": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:2564094772984936264",
+      "lastPropertyId": "3:1421142607374814391",
+      "name": "SettingEntity",
+      "properties": [
+        {
+          "id": "1:968380527404980896",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7858104027008483821",
+          "name": "key",
+          "indexId": "1:8752433055044821374",
+          "type": 9,
+          "flags": 2080
+        },
+        {
+          "id": "3:1421142607374814391",
+          "name": "value",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:6121475857463179970",
+      "lastPropertyId": "6:4979884749638832548",
+      "name": "UserProfileEntity",
+      "properties": [
+        {
+          "id": "1:801309363517793027",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:5589935165303254250",
+          "name": "userId",
+          "indexId": "2:6951682366237332195",
+          "type": 9,
+          "flags": 2080
+        },
+        {
+          "id": "3:4764965218960699376",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:5326315928537683493",
+          "name": "email",
+          "type": 9
+        },
+        {
+          "id": "5:7563448316660599191",
+          "name": "phone",
+          "type": 9
+        },
+        {
+          "id": "6:4979884749638832548",
+          "name": "birthDate",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "5:6121475857463179970",
+  "lastIndexId": "2:6951682366237332195",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
