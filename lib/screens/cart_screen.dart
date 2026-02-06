@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../bloc/cart/cart_bloc.dart';
 import '../bloc/cart/cart_state.dart';
 import '../bloc/cart/cart_event.dart';
@@ -87,19 +88,48 @@ class CartScreen extends StatelessWidget {
   Widget _buildCartContent(BuildContext context, CartState state) {
     return Column(
       children: [
-        // Header
-        Padding(
-          padding: const EdgeInsets.all(16.0),
+        Container(
+          margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(18),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.08),
+                blurRadius: 16,
+                offset: const Offset(0, 8),
+              ),
+            ],
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'My Cart',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
               Text(
-                '${state.items.length} items',
-                style: const TextStyle(fontSize: 16, color: Colors.grey),
+                'My Cart',
+                style: GoogleFonts.playfairDisplay(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                  color: const Color(0xFF2C2724),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF6B5B95),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  '${state.items.length} items',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ],
           ),
@@ -112,129 +142,138 @@ class CartScreen extends StatelessWidget {
             itemCount: state.items.length,
             itemBuilder: (context, index) {
               final item = state.items[index];
-              return Container(
-                margin: const EdgeInsets.only(bottom: 16),
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 1,
-                      blurRadius: 5,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        color: Colors.orange[100],
-                        borderRadius: BorderRadius.circular(10),
+              return TweenAnimationBuilder<double>(
+                tween: Tween(begin: 0.94, end: 1),
+                duration: const Duration(milliseconds: 420),
+                builder: (context, value, child) {
+                  return Opacity(
+                    opacity: value,
+                    child: Transform.scale(scale: value, child: child),
+                  );
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 16),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.08),
+                        blurRadius: 12,
+                        offset: const Offset(0, 6),
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: _buildFoodImage(item.foodItem.image),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: Colors.orange[100],
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: _buildFoodImage(item.foodItem.image),
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.foodItem.name,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              item.foodItem.description,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              '₹${item.foodItem.price.toStringAsFixed(2)}',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF6B5B95),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Column(
                         children: [
-                          Text(
-                            item.foodItem.name,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey.shade300),
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            item.foodItem.description,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            '₹${item.foodItem.price.toStringAsFixed(2)}',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF6366F1),
+                            child: Row(
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.remove, size: 18),
+                                  onPressed: () {
+                                    if (item.quantity > 1) {
+                                      context.read<CartBloc>().add(
+                                        UpdateCartItemQuantity(
+                                          foodItemId: item.foodItem.id,
+                                          quantity: item.quantity - 1,
+                                        ),
+                                      );
+                                    } else {
+                                      context.read<CartBloc>().add(
+                                        RemoveFromCart(
+                                          foodItemId: item.foodItem.id,
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  padding: EdgeInsets.zero,
+                                  constraints: const BoxConstraints(
+                                    minWidth: 32,
+                                    minHeight: 32,
+                                  ),
+                                ),
+                                Text(
+                                  '${item.quantity}',
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.add, size: 18),
+                                  onPressed: () {
+                                    context.read<CartBloc>().add(
+                                      UpdateCartItemQuantity(
+                                        foodItemId: item.foodItem.id,
+                                        quantity: item.quantity + 1,
+                                      ),
+                                    );
+                                  },
+                                  padding: EdgeInsets.zero,
+                                  constraints: const BoxConstraints(
+                                    minWidth: 32,
+                                    minHeight: 32,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade300),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Row(
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.remove, size: 18),
-                                onPressed: () {
-                                  if (item.quantity > 1) {
-                                    context.read<CartBloc>().add(
-                                      UpdateCartItemQuantity(
-                                        foodItemId: item.foodItem.id,
-                                        quantity: item.quantity - 1,
-                                      ),
-                                    );
-                                  } else {
-                                    context.read<CartBloc>().add(
-                                      RemoveFromCart(
-                                        foodItemId: item.foodItem.id,
-                                      ),
-                                    );
-                                  }
-                                },
-                                padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(
-                                  minWidth: 32,
-                                  minHeight: 32,
-                                ),
-                              ),
-                              Text(
-                                '${item.quantity}',
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.add, size: 18),
-                                onPressed: () {
-                                  context.read<CartBloc>().add(
-                                    UpdateCartItemQuantity(
-                                      foodItemId: item.foodItem.id,
-                                      quantity: item.quantity + 1,
-                                    ),
-                                  );
-                                },
-                                padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(
-                                  minWidth: 32,
-                                  minHeight: 32,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },

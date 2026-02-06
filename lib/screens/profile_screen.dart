@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../bloc/auth/auth_bloc.dart';
 import '../bloc/auth/auth_state.dart';
 import '../bloc/auth/auth_event.dart';
@@ -35,60 +36,99 @@ class ProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 children: [
-                  const SizedBox(height: 20),
-
-                  // Profile Picture
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.purple.shade400, Colors.blue.shade400],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+                  TweenAnimationBuilder<double>(
+                    tween: Tween(begin: 0, end: 1),
+                    duration: const Duration(milliseconds: 550),
+                    builder: (context, value, child) {
+                      return Opacity(
+                        opacity: value,
+                        child: Transform.translate(
+                          offset: Offset(0, 16 * (1 - value)),
+                          child: child,
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(18),
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFF6B5B95), Color(0xFF8A7CD6)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.12),
+                            blurRadius: 18,
+                            offset: const Offset(0, 8),
+                          ),
+                        ],
                       ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.person,
-                      size: 50,
-                      color: Colors.white,
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 72,
+                            height: 72,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.2),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.person,
+                              size: 34,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  userName,
+                                  style: GoogleFonts.playfairDisplay(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  userEmail,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Color(0xFFEDE7F6),
+                                  ),
+                                ),
+                                if (userPhone.isNotEmpty) ...[
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    userPhone,
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xFFEDE7F6),
+                                    ),
+                                  ),
+                                ],
+                                if (userBirthDate.isNotEmpty) ...[
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    userBirthDate,
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xFFEDE7F6),
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                    userName,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    userEmail,
-                    style: const TextStyle(fontSize: 14, color: Colors.grey),
-                  ),
-                  if (userPhone.isNotEmpty) ...[
-                    const SizedBox(height: 4),
-                    Text(
-                      userPhone,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                  if (userBirthDate.isNotEmpty) ...[
-                    const SizedBox(height: 2),
-                    Text(
-                      userBirthDate,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 28),
 
                   // Profile Options
                   _buildProfileOption(
