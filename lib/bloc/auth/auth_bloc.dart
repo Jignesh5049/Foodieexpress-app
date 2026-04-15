@@ -9,12 +9,13 @@ import '../../data/local/app_database.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({AuthRepository? repository})
-      : _repository = repository ??
-            AuthRepository(
-              api: AuthApi(baseUrl: _resolveBaseUrl()),
-              database: AppDatabase.instance,
-            ),
-        super(AuthInitial()) {
+    : _repository =
+          repository ??
+          AuthRepository(
+            api: AuthApi(baseUrl: _resolveBaseUrl()),
+            database: AppDatabase.instance,
+          ),
+      super(AuthInitial()) {
     on<LoginRequested>(_onLoginRequested);
     on<SignUpRequested>(_onSignUpRequested);
     on<LogoutRequested>(_onLogoutRequested);
@@ -23,11 +24,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   final AuthRepository _repository;
 
+  static const String _apiBaseUrl = String.fromEnvironment(
+    'API_BASE_URL',
+    defaultValue: 'http://192.168.6.13:3000',
+  );
+
   static String _resolveBaseUrl() {
     if (kIsWeb) {
       return 'http://localhost:3000';
     }
-    return 'http://192.168.6.18:3000';
+    return _apiBaseUrl;
   }
 
   Future<void> _onLoginRequested(
