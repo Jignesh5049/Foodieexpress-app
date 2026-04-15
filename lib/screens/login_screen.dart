@@ -6,6 +6,7 @@ import '../bloc/auth/auth_event.dart';
 import '../bloc/auth/auth_state.dart';
 import 'home_screen.dart';
 import 'signup_screen.dart';
+import '../theme/app_theme.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -40,98 +41,86 @@ class _LoginScreenState extends State<LoginScreen> {
             Positioned.fill(
               child: Container(
                 decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xFFF6F1EB), Color(0xFFE9E2DA)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+                  gradient: AppTheme.warmBackgroundGradient,
+                ),
+              ),
+            ),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                height: 310,
+                decoration: const BoxDecoration(
+                  gradient: AppTheme.heroGradient,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(36),
+                    bottomRight: Radius.circular(36),
                   ),
                 ),
               ),
             ),
             Positioned(
               top: -80,
-              left: -60,
-              child: _softBlob(const Color(0xFFE7DCCF), 180),
+              left: -50,
+              child: _softBlob(Colors.white.withOpacity(0.12), 180),
             ),
             Positioned(
-              bottom: -90,
-              right: -40,
-              child: _softBlob(const Color(0xFFDAD2C8), 200),
+              top: 120,
+              right: -70,
+              child: _softBlob(Colors.white.withOpacity(0.10), 180),
             ),
             SafeArea(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.fromLTRB(24, 24, 24, 32),
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
                 child: _buildAnimatedEntry(
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const SizedBox(height: 6),
+                      const Row(
+                        children: [
+                          Icon(
+                            Icons.delivery_dining,
+                            color: Colors.white,
+                            size: 24,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            'FoodieExpress',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 26),
+                      Text(
+                        'Welcome back.',
+                        style: GoogleFonts.playfairDisplay(
+                          fontSize: 38,
+                          height: 1,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                       const SizedBox(height: 8),
-                      Center(
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 88,
-                              height: 88,
-                              decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                  colors: [
-                                    Color(0xFF6B5B95),
-                                    Color(0xFF8A7CD6),
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(22),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.08),
-                                    blurRadius: 18,
-                                    offset: const Offset(0, 8),
-                                  ),
-                                ],
-                              ),
-                              child: const Icon(
-                                Icons.restaurant_menu,
-                                size: 46,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              'FoodieExpress',
-                              style: GoogleFonts.playfairDisplay(
-                                fontSize: 30,
-                                fontWeight: FontWeight.w700,
-                                color: const Color(0xFF2C2724),
-                              ),
-                            ),
-                            const SizedBox(height: 6),
-                            const Text(
-                              'Curated meals, delivered with care',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF8D857C),
-                              ),
-                            ),
-                          ],
+                      const Text(
+                        'Sign in and continue your food journey.',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFFD8F4E6),
                         ),
                       ),
                       const SizedBox(height: 28),
                       Container(
-                        padding: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.fromLTRB(18, 20, 18, 18),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.95),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: const Color(0xFFE9E2DA),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.06),
-                              blurRadius: 24,
-                              offset: const Offset(0, 10),
-                            ),
-                          ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(24),
+                          boxShadow: AppTheme.softShadow,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xFF4A4440),
+                                color: AppTheme.textPrimary,
                               ),
                             ),
                             const SizedBox(height: 8),
@@ -154,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fillColor: const Color(0xFFF7F4F1),
                                 prefixIcon: const Icon(
                                   Icons.email_outlined,
-                                  color: Color(0xFF6B5B95),
+                                  color: AppTheme.primary,
                                 ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
@@ -168,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xFF4A4440),
+                                color: AppTheme.textPrimary,
                               ),
                             ),
                             const SizedBox(height: 8),
@@ -181,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fillColor: const Color(0xFFF7F4F1),
                                 prefixIcon: const Icon(
                                   Icons.lock_outline,
-                                  color: Color(0xFF6B5B95),
+                                  color: AppTheme.primary,
                                 ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
@@ -189,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 10),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -205,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             rememberMe = value ?? false;
                                           });
                                         },
-                                        activeColor: const Color(0xFF6B5B95),
+                                        activeColor: AppTheme.primary,
                                       ),
                                     ),
                                     const SizedBox(width: 8),
@@ -220,14 +209,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: const Text(
                                     'Forgot password?',
                                     style: TextStyle(
-                                      color: Color(0xFF6B5B95),
+                                      color: AppTheme.primary,
                                       fontSize: 13,
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 10),
                             BlocBuilder<AuthBloc, AuthState>(
                               builder: (context, state) {
                                 return SizedBox(
@@ -246,10 +235,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                             );
                                           },
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          const Color(0xFF6B5B95),
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(12),
+                                        borderRadius: BorderRadius.circular(14),
                                       ),
                                     ),
                                     child: state is AuthLoading
@@ -273,8 +260,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               children: [
                                 Expanded(child: Divider()),
                                 Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 16),
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
                                   child: Text(
                                     'Or continue with',
                                     style: TextStyle(color: Colors.grey),
@@ -283,7 +269,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Expanded(child: Divider()),
                               ],
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 14),
                             Row(
                               children: [
                                 Expanded(
@@ -303,7 +289,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         vertical: 12,
                                       ),
                                       side: const BorderSide(
-                                        color: Color(0xFFE0D7CF),
+                                        color: Color(0xFFD5DDD8),
                                       ),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12),
@@ -329,7 +315,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         vertical: 12,
                                       ),
                                       side: const BorderSide(
-                                        color: Color(0xFFE0D7CF),
+                                        color: Color(0xFFD5DDD8),
                                       ),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12),
@@ -342,7 +328,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 18),
                       Center(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -353,8 +339,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const SignUpScreen(),
+                                    builder: (context) => const SignUpScreen(),
                                   ),
                                 );
                               },
@@ -365,7 +350,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: const Text(
                                 'Sign Up',
                                 style: TextStyle(
-                                  color: Color(0xFF6B5B95),
+                                  color: AppTheme.primary,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
